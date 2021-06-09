@@ -8,6 +8,10 @@
     "build": "cd frontend && npm install && npm run build",
     "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sy123655/BookStore-app.git"
+  },
   "author": "SYCAP",
   "license": "ISC",
   "dependencies": {
