@@ -143,7 +143,7 @@ export default function ProductEditScreen(props) {
               ></input>
             </div>
             <div>
-              <label htmlFor="brand">Brand</label>
+              <label htmlFor="brand">Author</label>
               <input
                 id="brand"
                 type="text"

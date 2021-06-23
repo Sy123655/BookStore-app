@@ -6,6 +6,7 @@ import MessageBox from '../components/MessageBox';
 import { PRODUCT_CREATE_RESET, PRODUCT_DELETE_RESET } from '../constants/productConstants';
 
 export default function ProductListScreen(props) {
+  const sellerMode = props.match.path.indexOf('/seller') >= 0;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
@@ -22,7 +23,8 @@ const {
       error: errorDelete,
       success: successDelete,
   } = productDelete;
-
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const dispatch = useDispatch();
   useEffect(() => {
       if(successCreate){
@@ -32,8 +34,16 @@ const {
       if(successDelete){
         dispatch({ type: PRODUCT_DELETE_RESET})
       }
-    dispatch(listProducts());
-  }, [createdProduct, dispatch, props.history, successCreate, successDelete]);
+      dispatch(listProducts({ seller: sellerMode ? userInfo._id : '' }));
+    }, [
+      createdProduct,
+      dispatch,
+      props.history,
+      sellerMode,
+      successCreate,
+      successDelete,
+      userInfo._id,
+    ]);
   const deleteHandler = (product) => {
     if (window.confirm('Are you sure to delete?')) {
         dispatch(deleteProduct(product._id));
@@ -66,7 +76,7 @@ const {
               <th>NAME</th>
               <th>PRICE</th>
               <th>CATEGORY</th>
-              <th>BRAND</th>
+              <th>AUTHOR</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
@@ -75,7 +85,7 @@ const {
               <tr key={product._id}>
                 <td>{product._id}</td>
                 <td>{product.name}</td>
-                <td>{product.price}</td>
+                <td>${product.price}</td>
                 <td>{product.category}</td>
                 <td>{product.brand}</td>
                 <td>
