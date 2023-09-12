@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/simplify_access_management/static/src/js/action_items.js"></script>
+            <script type="text/javascript" src="/simplify_access_management/static/src/js/widget/DomainSelector.js"></script>
+            <script type="text/javascript" src="/simplify_access_management/static/src/js/widget/ModelRecordSelector.js"></script>
+            <!-- <script type="text/javascript" src="/simplify_access_management/static/src/js/views_service.js"></script> -->
+        </xpath>
+        <xpath expr="//script[@src='/web/static/src/js/widgets/domain_selector.js']" position="replace">
+            <script type="text/javascript" src="/simplify_access_management/static/src/js/widget/domain_selector.js"></script>
+
+        </xpath>
+    </template>
+</odoo>
